@@ -1,0 +1,33 @@
+{
+  "name": "workshop-graphql",
+  "version": "1.0.0",
+  "description": "Workshop",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon api/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/camigomez35/Workshop_Graphql.git"
+  },
+  "keywords": [
+    "graphql"
+  ],
+  "author": "camigomez35",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/camigomez35/Workshop_Graphql/issues"
+  },
+  "homepage": "https://github.com/camigomez35/Workshop_Graphql#readme",
+  "dependencies": {
+    "apollo-server-express": "^1.3.2",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "graphql": "^0.12.3",
+    "graphql-tools": "^2.19.0",
+    "lodash.merge": "^4.6.0",
+    "node-fetch": "^1.7.3",
+    "nodemon": "^1.14.11"
+  }
+}
