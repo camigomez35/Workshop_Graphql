@@ -5,7 +5,6 @@ const express = require('express');
 const app = express();
 
 const port = 3000;
-
 const bodyParse = require('body-parser');
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 
@@ -13,21 +12,28 @@ const config = require('./config');
 const schema = require('./graphql/schema');
 const ShowConnector = require('./graphql/shows-tv/connector');
 
-app.use(bodyParse.json());
+const mongoose = require('mongoose');
+const Promise = require('bluebird');
 
-app.use('/graphql', graphqlExpress(req => {
-    return {
-        // Scheme global 
-        schema,
-        context: {
-            // Le pasamos el conector para que sea utilizado
-            showConnector: new ShowConnector(config.tvMazeUrl)
-        }
-    }
-}));
+const PostStorage = require('./graphql/posts/storage');
+
+app.use(bodyParse.json());
 
 app.get('/graphiql', graphiqlExpress({
     endpointURL: '/graphql'
+}));
+
+mongoose.Promise = Promise;
+const conn = mongoose.createConnection(config.db);
+
+app.use('/graphql', graphqlExpress(req => {
+    return {
+        schema,
+        context: {
+            showConnector: new ShowConnector(config.tvMazeUrl),
+            postStorage: new PostStorage(conn)
+        }
+    }
 }));
 
 

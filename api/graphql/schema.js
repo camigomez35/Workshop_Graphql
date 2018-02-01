@@ -5,17 +5,20 @@ const { makeExecutableSchema } = require('graphql-tools');
 
 const showSchema = require('./shows-tv/schema');
 const showResolver = require('./shows-tv/resolver');
+const postSchema = require('./posts/schema');
+const postResolver = require('./posts/resolver');
 
 
 const typeDefs = [
-    ...showSchema
+    ...showSchema,
+    ...postSchema
 ];
 
 
 const resolvers = merge(
-    showResolver
+    showResolver,
+    postResolver
 );
-
 
 const executableSchema = makeExecutableSchema({
     typeDefs,
